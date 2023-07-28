@@ -1,0 +1,83 @@
+{
+  // !Editor settings
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "cSpell.language": "en,de-de",
+
+  // !Explorer
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.expand": false,
+  "explorer.fileNesting.patterns": {
+    "package.json": ".gitignore,tsconfig.json,turbo.json,babel.config.js,docusaurus.config.js,.env.local,.env.template,.env,.editorconfig",
+    "next.config.js": "next-env.d.ts,drizzle.config.ts",
+    "Taskfile.yml": ".gitignore,.editorconfig",
+    "server.ts": "global.d.ts",
+    "*.tsx": "$(capture).*",
+    "*.ts": "$(capture).*",
+    "README.md": "LICENSE"
+  },
+
+  "material-icon-theme.folders.associations": {
+    "infrastructure": "cluster",
+    "webserver": "server",
+    "application": "app",
+    "auth": "",
+    "use_cases": "interface",
+    "domain": "public",
+    "dto": "class",
+    "mixins": "decorators"
+  },
+  "material-icon-theme.files.associations": {
+    "*.route.ts": "routing"
+  },
+
+  "files.exclude": {
+    "**/yarn.lock": true,
+    "**/node_modules": true,
+    "**/.next": true,
+    "**/.turbo": true,
+    "**/drizzle": true,
+    "**/data.db": true,
+  },
+
+  //! Language features
+
+  // Typescript
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+
+  // CSS
+  "scss.lint.unknownAtRules": "ignore",
+
+  // ESLint
+  "eslint.validate": [
+    "javascript",
+    "typescript",
+    "css",
+    "typescriptreact",
+    "javascriptreact"
+  ],
+  "eslint.probe": [
+    "javascript",
+    "typescript",
+    "css",
+    "typescriptreact",
+    "javascriptreact"
+  ],
+  "eslint.codeAction.showDocumentation": {
+    "enable": true
+  },
+  "eslint.debug": true,
+  "eslint.codeActionsOnSave.mode": "problems",
+  "eslint.workingDirectories": ["frontend"],
+
+  //! Formatters
+  "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
+  "[json][json][html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript][javascript]": {
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+  },
+}

@@ -1,0 +1,12 @@
+# Dependencies
+node_modules
+
+# Generated output / cache
+dist
+build
+.turbo
+.next
+
+# Database
+drizzle
+data.db

@@ -1,0 +1,17 @@
+{
+  "name": "avrateng",
+  "private": true,
+  "license": "MIT",
+  "workspaces": {
+    "packages": [
+      "modules/*",
+      "frontend"
+    ]
+  },
+  "scripts": {
+    "turbo": "turbo run"
+  },
+  "devDependencies": {
+    "turbo": "^1.10.12"
+  }
+}
