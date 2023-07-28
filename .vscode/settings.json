@@ -10,7 +10,7 @@
   "explorer.fileNesting.expand": false,
   "explorer.fileNesting.patterns": {
     "package.json": ".gitignore,tsconfig.json,turbo.json,babel.config.js,docusaurus.config.js,.env.local,.env.template,.env,.editorconfig",
-    "next.config.js": "next-env.d.ts,drizzle.config.ts",
+    "next.config.js": "next-env.d.ts,drizzle.config.ts,postcss.config.js,tailwind.config.js",
     "Taskfile.yml": ".gitignore,.editorconfig",
     "server.ts": "global.d.ts",
     "*.tsx": "$(capture).*",
