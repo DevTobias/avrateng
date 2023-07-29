@@ -10,3 +10,9 @@ build
 # Database
 drizzle
 data.db
+
+# Local assets
+videos
+
+# System specific
+.DS_STORE

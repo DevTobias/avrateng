@@ -72,13 +72,17 @@ export const RatingScreen: FC<Props> = ({ videos }) => {
     updateLocalStorage(newSet, rangeValues, sliderMoved.current, () => setCurrentSet(newSet));
   };
 
+  const playVideo = (id: string) => {
+    fetch('/player', { method: 'POST', body: JSON.stringify({ file: id }) });
+  };
+
   return (
     <div className='flex flex-col gap-10 items-center'>
       <div className='w-96 h-96 rotate-[270deg] grid grid-rows-5 grid-cols-[1fr_5fr_1fr] gap-x-5 gap-y-10 items-center justify-center'>
         {videos[currentSet].map((id, index) => {
           return (
             <Fragment key={id}>
-              <PlayButton className={`row-start-${index + 1} col-start-3`} />
+              <PlayButton className={`row-start-${index + 1} col-start-3`} onClick={() => playVideo(id)} />
               <VerticalSlider
                 className={`row-start-${index + 1} col-start-2`}
                 value={rangeValues![index]}
