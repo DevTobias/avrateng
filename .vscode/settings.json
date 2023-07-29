@@ -80,4 +80,7 @@
   "[typescript][javascript]": {
     "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
   },
+  "[xml]": {
+    "editor.defaultFormatter": "redhat.vscode-xml"
+  },
 }

@@ -6,5 +6,5 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 }
 
 export const RatingDisplay: FC<Props> = ({ className = '', value }) => {
-  return <kbd className={`${className} kbd rotate-[90deg] w-10 h-10`}>{value}</kbd>;
+  return <span className={`${className} kbd rotate-[90deg] w-10 h-10`}>{value}</span>;
 };
