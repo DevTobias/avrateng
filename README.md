@@ -15,15 +15,7 @@ Furthermore you also need a player like mpv. You can install it with the followi
 
 ## First steps
 
-Before you should start with your specific processed video files, you should try to run the server. After you checkout the repository, you have to install all dependencies in order to work with `yarn install`.
-
-Now you can build the server with `yarn turbo build` and start it with `yarn turbo start`.
-
-All ratings are stored in a sqlite database. To view it's contents, navigate to the `frontend` folder with `cd frontend` and start the database viewer with `yarn drizzle:studio` and open the printed url. There you can also export the data to formats like `csv`.
-
-## Add your videos
-
-Create a folder named `videos` in the frontend directory. In this folder, create two new directories named `rating` and `training`. Now you can add the video sets in its own folders. The folder structure could look like this: 
+Create a folder named `videos` in the `frontend` directory. In this folder, create two new directories named `rating` and `training`. Now you can add the video sets in its own folders. The folder structure could look like this: 
 
 ```
 videos
@@ -40,5 +32,13 @@ videos
         └─ set_0
         └─ set_1
 ```
+
+Before you can start the server, you have to run through the following steps:
+- `yarn install` to install all dependencies
+- `cd frontend && yarn drizzle:push && cd ..` to create the database
+- `yarn turbo build` to create a production build of the server
+- `yarn turbo start` to start the server
+
+All ratings are stored in a sqlite database. To view it's contents, navigate to the `frontend` folder with `cd frontend` and start the database viewer with `yarn drizzle:studio` and open the printed url. There you can also export the data to formats like `csv`.
 
 Now everything should be set up correctly.
