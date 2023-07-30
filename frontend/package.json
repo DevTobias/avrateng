@@ -18,8 +18,10 @@
     "drizzle-orm": "^0.27.2",
     "drizzle-zod": "^0.4.4",
     "next": "13.4.12",
+    "plotly.js": "^2.25.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-plotly.js": "^2.6.0",
     "swr": "^2.2.0",
     "zod": "^3.21.4",
     "zustand": "^4.3.9"
@@ -31,6 +33,7 @@
     "@types/node": "20.4.5",
     "@types/react": "18.2.17",
     "@types/react-dom": "18.2.7",
+    "@types/react-plotly.js": "^2.6.0",
     "autoprefixer": "^10.4.14",
     "daisyui": "^3.5.0",
     "drizzle-kit": "^0.19.12",
