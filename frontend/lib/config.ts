@@ -1,3 +1,3 @@
 export const config = {
-  player: 'mpv --fs --ontop {file}',
+  player: 'mpv --cursor-autohide=0 --osc=no --no-input-default-bindings --hwdec=auto --ontop --fs {file}',
 };

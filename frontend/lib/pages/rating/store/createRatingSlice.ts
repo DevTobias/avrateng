@@ -7,14 +7,17 @@ export interface RatingSliceState {
   currentImageSet: number;
   ratings: number[][];
   movedSliders: boolean[][];
+  playedVideos: boolean[][];
 }
 
 export interface RatingSlice extends RatingSliceState {
   changeCurrentImageSet: (change: number) => void;
   setRating: (position: number, value: string) => void;
+  setPlayedVideo: (position: number) => void;
   isFirstSet: () => boolean;
   isLastSet: () => boolean;
   everySliderMoved: () => boolean;
+  everyVideoPlayed: () => boolean;
 }
 
 const initializeVideoVectors = (init: Partial<RatingSliceState>) => {
@@ -24,13 +27,13 @@ const initializeVideoVectors = (init: Partial<RatingSliceState>) => {
       })
     : [];
 
-  const movedSliders = init?.videos
+  const booleanArray = init?.videos
     ? init.videos.map((videoSet) => {
         return Array.from({ length: videoSet.length }, () => false);
       })
     : [];
 
-  return { ratings, movedSliders, ...init };
+  return { ratings, movedSliders: [...booleanArray], playedVideos: [...booleanArray], ...init };
 };
 
 export const createRatingSlice = (init?: Partial<RatingSliceState>): StateCreator<RatingSlice> => {
@@ -40,6 +43,7 @@ export const createRatingSlice = (init?: Partial<RatingSliceState>): StateCreato
     isFirstSet: () => get().currentImageSet === 0,
     isLastSet: () => get().currentImageSet === get().videos.length - 1,
     everySliderMoved: () => get().movedSliders[get().currentImageSet].every((element) => element),
+    everyVideoPlayed: () => get().playedVideos[get().currentImageSet].every((element) => element),
     changeCurrentImageSet: (change) =>
       set((s) => {
         const newImageSet = s.currentImageSet + change;
@@ -51,6 +55,10 @@ export const createRatingSlice = (init?: Partial<RatingSliceState>): StateCreato
       set(({ currentImageSet, ratings, movedSliders }) => ({
         ratings: replaceInMatrix(ratings, currentImageSet, position, parseInt(value, 10)),
         movedSliders: replaceInMatrix(movedSliders, currentImageSet, position, true),
+      })),
+    setPlayedVideo: (position) =>
+      set(({ currentImageSet, playedVideos }) => ({
+        playedVideos: replaceInMatrix(playedVideos, currentImageSet, position, true),
       })),
   });
 };

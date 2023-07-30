@@ -1,4 +1,4 @@
-const scalaLabels = ['Grauenhaft', 'Schlecht', 'Angemessen', 'Gut', 'Hervorragend'];
+const scalaLabels = ['Bad', 'Poor', 'Fair', 'Good', 'Excellent'];
 
 export const ScalaLabels = () => {
   return (
