@@ -10,7 +10,7 @@
     "drizzle:studio": "drizzle-kit studio",
     "lint": "yarn lint:typescript & yarn lint:prettier & yarn lint:eslint",
     "lint:typescript": "tsc",
-    "lint:prettier": "prettier --ignore-path .gitignore --write --plugin-search-dir . --check .",
+    "lint:prettier": "prettier --ignore-path ../.gitignore --write --check .",
     "lint:eslint": "eslint ."
   },
   "dependencies": {

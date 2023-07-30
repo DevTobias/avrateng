@@ -1,5 +1,5 @@
 .line::after {
-  content: attr(aria-valuenow) " ";;
+  content: attr(aria-valuenow) ' ';
   position: absolute;
   rotate: 90deg;
   width: 40px;
