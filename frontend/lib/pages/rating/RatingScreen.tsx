@@ -30,7 +30,21 @@ export const RatingScreen: FC<Props> = ({ isTraining = false }) => {
     fetch('/player', { method: 'POST', body: JSON.stringify({ file: id }) });
   };
 
-  const nextSet = () => {
+  const nextSet = async () => {
+    if (!isTraining) {
+      await fetch('/ratings', {
+        method: 'POST',
+        body: JSON.stringify(
+          ratings[currentImageSet].map((rating, i) => ({
+            id: `${userID}-${videos[currentImageSet][i]}`,
+            rating,
+            userID,
+            videoID: videos[currentImageSet][i],
+          }))
+        ),
+      });
+    }
+
     if (isLastSet() && isTraining) {
       setCompletedTraining();
       router.replace('/rating');
