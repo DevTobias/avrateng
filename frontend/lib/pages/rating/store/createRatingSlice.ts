@@ -7,21 +7,17 @@ export interface RatingSliceState {
   currentImageSet: number;
   ratings: number[][];
   movedSliders: boolean[][];
-  userID?: string;
-  hasCompletedTraining: boolean;
 }
 
 export interface RatingSlice extends RatingSliceState {
   changeCurrentImageSet: (change: number) => void;
   setRating: (position: number, value: string) => void;
-  setUserID: (userID: string) => void;
-  setCompletedTraining: () => void;
   isFirstSet: () => boolean;
   isLastSet: () => boolean;
-  hasEverySliderMoved: () => boolean;
+  everySliderMoved: () => boolean;
 }
 
-const getInitialState = (init: Partial<RatingSliceState>) => {
+const initializeVideoVectors = (init: Partial<RatingSliceState>) => {
   const ratings = init?.videos
     ? init.videos.map((videoSet) => {
         return Array.from({ length: videoSet.length }, () => 50);
@@ -34,16 +30,16 @@ const getInitialState = (init: Partial<RatingSliceState>) => {
       })
     : [];
 
-  return { ratings, movedSliders, videos: [], currentImageSet: 0, hasCompletedTraining: false, ...init };
+  return { ratings, movedSliders, ...init };
 };
 
 export const createRatingSlice = (init?: Partial<RatingSliceState>): StateCreator<RatingSlice> => {
   return (set, get) => ({
-    ...getInitialState(init ?? {}),
+    ...{ currentImageSet: 0, videos: [] },
+    ...initializeVideoVectors(init ?? {}),
     isFirstSet: () => get().currentImageSet === 0,
     isLastSet: () => get().currentImageSet === get().videos.length - 1,
-    hasEverySliderMoved: () => get().movedSliders[get().currentImageSet].every((element) => element),
-    setCompletedTraining: () => set(() => ({ hasCompletedTraining: true })),
+    everySliderMoved: () => get().movedSliders[get().currentImageSet].every((element) => element),
     changeCurrentImageSet: (change) =>
       set((s) => {
         const newImageSet = s.currentImageSet + change;
@@ -51,7 +47,6 @@ export const createRatingSlice = (init?: Partial<RatingSliceState>): StateCreato
         if (newImageSet > s.videos.length - 1) return { currentImageSet: s.videos.length - 1 };
         return { currentImageSet: newImageSet };
       }),
-    setUserID: (userID) => set(() => ({ userID })),
     setRating: (position, value) =>
       set(({ currentImageSet, ratings, movedSliders }) => ({
         ratings: replaceInMatrix(ratings, currentImageSet, position, parseInt(value, 10)),
