@@ -38,6 +38,7 @@ export const RatingScreen: FC<Props> = ({ isTraining = false }) => {
           ratings[currentImageSet].map((rating, i) => ({
             id: `${userID}-${currentImageSet}-${videos[currentImageSet][i].split('/').at(-1)}`,
             videoID: videos[currentImageSet][i].split('/').at(-1),
+            groupID: videos[currentImageSet][i].split('/').at(-2),
             rating,
             userID,
           }))

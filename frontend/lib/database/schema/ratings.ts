@@ -5,6 +5,7 @@ import { z } from 'zod';
 export const ratings = sqliteTable('ratings', {
   id: text('id').primaryKey(),
   userID: text('user_ID').notNull(),
+  groupID: text('group_ID').notNull(),
   videoID: text('video_ID').notNull(),
   rating: integer('rating').notNull(),
   timestamp: text('timestamp')
@@ -12,4 +13,6 @@ export const ratings = sqliteTable('ratings', {
     .notNull(),
 });
 
-export const createRatingsSchema = z.array(z.object({ id: z.string(), userID: z.string(), videoID: z.string(), rating: z.number() }));
+export const createRatingsSchema = z.array(
+  z.object({ id: z.string(), userID: z.string(), groupID: z.string(), videoID: z.string(), rating: z.number() })
+);
