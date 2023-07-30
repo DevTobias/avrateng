@@ -1,0 +1,11 @@
+.line::after {
+  content: attr(aria-valuenow) " ";;
+  position: absolute;
+  rotate: 90deg;
+  width: 40px;
+  height: 10px;
+  text-align: center;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  transform: translate(-60%, 150%);
+}

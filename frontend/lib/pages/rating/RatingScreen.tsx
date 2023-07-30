@@ -9,6 +9,11 @@ import { VerticalSlider } from '$lib/pages/rating/components/VerticalSlider';
 import { debounce } from '$lib/utils/debounce';
 import { generateSimpleId } from '$lib/utils/random';
 
+import styles from './RatingScreen.module.scss';
+
+const scalaLabels = ['Grauenhaft', 'Schlecht', 'Angemessen', 'Gut', 'Hervorragend'];
+const scalaValues = [0, 20, 40, 60, 80, 100];
+
 interface Props {
   videos: string[][];
 }
@@ -78,25 +83,41 @@ export const RatingScreen: FC<Props> = ({ videos }) => {
 
   return (
     <div className='flex flex-col gap-10 items-center'>
-      <div className='w-96 h-96 rotate-[270deg] grid grid-rows-5 grid-cols-[1fr_5fr_1fr] gap-x-5 gap-y-10 items-center justify-center'>
+      <div className='col-start-1 row-start-1 w-96 h-[35rem] rotate-[270deg] grid grid-rows-7 grid-cols-[1fr_1fr_5fr_1fr] gap-x-5 gap-y-10 items-center justify-center'>
+        <div className='row-start-1 col-start-3 row-[span_7_/_span_7] h-full flex justify-between'>
+          {[...Array(6)].map((_, i) => (
+            <div key={`line-${i}`} className={`w-[2px] bg-[#2b3139] h-full ${styles.line}`} aria-valuenow={scalaValues[i]} />
+          ))}
+        </div>
+
+        <div className='row-start-2 col-start-3 flex justify-between'>
+          {scalaLabels.map((item) => {
+            return (
+              <span className='rotate-90 h-12 w-14 flex flex-col items-center text-xs justify-center' key={item.toString()}>
+                <span>{item}</span>
+              </span>
+            );
+          })}
+        </div>
+
         {videos[currentSet].map((id, index) => {
           return (
             <Fragment key={id}>
-              <PlayButton className={`row-start-${index + 1} col-start-3`} onClick={() => playVideo(id)} />
+              <PlayButton className={`row-start-${index + 3} col-start-4`} onClick={() => playVideo(id)} />
               <VerticalSlider
-                className={`row-start-${index + 1} col-start-2`}
+                className={`row-start-${index + 3} col-start-3`}
                 value={rangeValues![index]}
                 onChange={(e) => updateSliderValue(index, e.currentTarget.value)}
               />
-              <RatingDisplay className={`row-start-${index + 1} col-start-1`} value={rangeValues![index]} />
+              <RatingDisplay className={`row-start-${index + 3} col-start-2`} value={rangeValues![index]} />
             </Fragment>
           );
         })}
-      </div>
 
-      <div className='flex gap-5'>
-        <IconButton icon='first_page' onClick={startNextSet} disabled={isAtStart} />
-        <IconButton icon='last_page' onClick={startPrevSet} disabled={isAtEnd || !hasEverySliderMoved} />
+        <div className='flex gap-3 row-start-5 col-start-1 rotate-90'>
+          <IconButton icon='first_page' onClick={startNextSet} disabled={isAtStart} />
+          <IconButton icon='last_page' onClick={startPrevSet} disabled={isAtEnd || !hasEverySliderMoved} />
+        </div>
       </div>
     </div>
   );
