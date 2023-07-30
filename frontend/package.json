@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "yarn lint && next build",
     "start": "next start",
     "drizzle:push": "drizzle-kit push:sqlite & drizzle-kit generate:sqlite",
     "drizzle:studio": "drizzle-kit studio",
