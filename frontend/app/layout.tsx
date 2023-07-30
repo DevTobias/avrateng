@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 import '$lib/styles/global.scss';
 
 export const metadata = {
-  title: 'Avrateng',
+  title: 'AVRateNG',
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

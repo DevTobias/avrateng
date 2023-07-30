@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { Fragment } from 'react';
 
 import { useMounted } from '$lib/hooks/useMounted';
@@ -13,13 +14,25 @@ import { useRatingStore } from '$lib/pages/rating/store/useStore';
 
 export const RatingScreen = () => {
   const mounted = useMounted();
-
-  const { changeCurrentImageSet, setRating, currentImageSet, ratings, isFirstSet, isLastSet, hasEverySliderMoved, videos } =
-    useRatingStore((s) => s);
+  const router = useRouter();
+  const {
+    changeCurrentImageSet,
+    setRating,
+    currentImageSet,
+    ratings,
+    isFirstSet,
+    isLastSet,
+    hasEverySliderMoved,
+    videos,
+    userID,
+    hasCompletedTraining,
+  } = useRatingStore((s) => s);
 
   const playVideo = (id: string) => {
     fetch('/player', { method: 'POST', body: JSON.stringify({ file: id }) });
   };
+
+  if (mounted && (!userID || !hasCompletedTraining)) router.replace('/');
 
   return (
     <div className='col-start-1 row-start-1 w-[40rem] h-[40rem] rotate-[270deg] grid grid-rows-[1fr_2fr_2fr_2fr_2fr_2fr_2fr] grid-cols-[1fr_1fr_5fr_1fr] gap-x-5 gap-y-10 items-center justify-center'>

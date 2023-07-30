@@ -8,12 +8,14 @@ export interface RatingSliceState {
   ratings: number[][];
   movedSliders: boolean[][];
   userID?: string;
+  hasCompletedTraining: boolean;
 }
 
 export interface RatingSlice extends RatingSliceState {
   changeCurrentImageSet: (change: number) => void;
   setRating: (position: number, value: string) => void;
   setUserID: (userID: string) => void;
+  setCompletedTraining: () => void;
   isFirstSet: () => boolean;
   isLastSet: () => boolean;
   hasEverySliderMoved: () => boolean;
@@ -32,7 +34,7 @@ const getInitialState = (init: Partial<RatingSliceState>) => {
       })
     : [];
 
-  return { ratings, movedSliders, videos: [], currentImageSet: 0, userID: '1234', ...init };
+  return { ratings, movedSliders, videos: [], currentImageSet: 0, hasCompletedTraining: false, ...init };
 };
 
 export const createRatingSlice = (init?: Partial<RatingSliceState>): StateCreator<RatingSlice> => {
@@ -41,6 +43,7 @@ export const createRatingSlice = (init?: Partial<RatingSliceState>): StateCreato
     isFirstSet: () => get().currentImageSet === 0,
     isLastSet: () => get().currentImageSet === get().videos.length - 1,
     hasEverySliderMoved: () => get().movedSliders[get().currentImageSet].every((element) => element),
+    setCompletedTraining: () => set(() => ({ hasCompletedTraining: true })),
     changeCurrentImageSet: (change) =>
       set((s) => {
         const newImageSet = s.currentImageSet + change;
