@@ -1,13 +1,16 @@
 'use client';
 
+import useSWR from 'swr';
+
 import { RatingScreen } from '$lib/pages/rating/RatingScreen';
 import { RatingProvider } from '$lib/pages/rating/store/useStore';
 
-const videos = [['01.mkv', 'video12', 'video13', 'video14', 'video15']];
-
 export default function Training() {
+  const { data, error, isLoading } = useSWR('/videos', () => fetch('/videos').then((res) => res.json()));
+  if (error || isLoading) return <span className='loading loading-dots loading-lg'></span>;
+
   return (
-    <RatingProvider videos={videos}>
+    <RatingProvider videos={data.training}>
       <RatingScreen isTraining />
     </RatingProvider>
   );

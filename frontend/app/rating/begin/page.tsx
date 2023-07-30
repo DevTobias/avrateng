@@ -1,16 +1,16 @@
 'use client';
 
+import useSWR from 'swr';
+
 import { RatingScreen } from '$lib/pages/rating/RatingScreen';
 import { RatingProvider } from '$lib/pages/rating/store/useStore';
 
-const videos = [
-  ['Hurdles_crf_0_120fps_FFVHuff_444p10le.avi', 'video12', 'video13', 'video14', 'video15'],
-  ['video21', 'video22', 'video23', 'video24', 'video25'],
-];
-
 export default function Rating() {
+  const { data, error, isLoading } = useSWR('/videos', () => fetch('/videos').then((res) => res.json()));
+  if (error || isLoading) return <span className='loading loading-dots loading-lg'></span>;
+
   return (
-    <RatingProvider videos={videos}>
+    <RatingProvider videos={data.rating}>
       <RatingScreen />
     </RatingProvider>
   );

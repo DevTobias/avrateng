@@ -36,10 +36,10 @@ export const RatingScreen: FC<Props> = ({ isTraining = false }) => {
         method: 'POST',
         body: JSON.stringify(
           ratings[currentImageSet].map((rating, i) => ({
-            id: `${userID}-${videos[currentImageSet][i]}`,
+            id: `${userID}-${currentImageSet}-${videos[currentImageSet][i].split('/').at(-1)}`,
+            videoID: videos[currentImageSet][i].split('/').at(-1),
             rating,
             userID,
-            videoID: videos[currentImageSet][i],
           }))
         ),
       });

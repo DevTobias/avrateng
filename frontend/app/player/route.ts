@@ -16,7 +16,7 @@ export async function POST(req: Request) {
   }
 
   try {
-    execSync(config.player.replace('{file}', `./videos/${body.data.file}`));
+    execSync(config.player.replace('{file}', body.data.file));
   } catch (_) {
     return NextResponse.json({ msg: 'there was an error playing the video' });
   }
